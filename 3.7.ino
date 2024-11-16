@@ -1,27 +1,33 @@
-// Define os pinos dos LEDs
-int leds[] = {12, 11, 10, 9, 8, 7, 6, 5, 4, 3};
+// Definição dos pinos dos LEDs
+int leds[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+int numLeds = 10; // Número total de LEDs
+int delayTime = 100; // Tempo de delay entre os efeitos (em ms)
 
 void setup() {
-  // Configurar os pinos dos LEDs como saída
-  for (int i = 0; i < 10; i++) {
+  // Configura os pinos dos LEDs como saída
+  for (int i = 0; i < numLeds; i++) {
     pinMode(leds[i], OUTPUT);
+    digitalWrite(leds[i], LOW); // Inicializa os LEDs desligados
   }
 }
 
 void loop() {
-  // Sequência de acender LEDs de 12 a 3
-  for (int i = 0; i <= 9; i++) { // Usamos o índice em vez do número do pino
-    digitalWrite(leds[i], HIGH);
-    delay(5);
-    digitalWrite(leds[i], LOW);
-    delay(25);
+  efeitoSuperMaquina();
+}
+
+// Função para o efeito Super Máquina
+void efeitoSuperMaquina() {
+  // Acende os LEDs da esquerda para a direita
+  for (int i = 0; i < numLeds; i++) {
+    digitalWrite(leds[i], HIGH); // Acende o LED
+    delay(delayTime);           // Aguarda
+    digitalWrite(leds[i], LOW); // Apaga o LED
   }
 
-  // Sequência de apagar LEDs de 3 a 12
-  for (int i = 9; i >= 0; i--) { // Usamos o índice em vez do número do pino
-    digitalWrite(leds[i], HIGH);
-    delay(5);
-    digitalWrite(leds[i], LOW);
-    delay(25);
+  // Acende os LEDs da direita para a esquerda
+  for (int i = numLeds - 1; i >= 0; i--) {
+    digitalWrite(leds[i], HIGH); // Acende o LED
+    delay(delayTime);           // Aguarda
+    digitalWrite(leds[i], LOW); // Apaga o LED
   }
 }
